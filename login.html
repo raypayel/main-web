@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Class</title>
+    <style>
+        /* CSS styles (previously shared styles) */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('images (1).jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .header img {
+            width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            color: #1100ff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            margin: 30px auto;
+        }
+
+        .courses, .importance {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 30%;
+            margin: 10px;
+            min-width: 250px;
+        }
+
+        .courses h2, .importance h2 {
+            margin: 0;
+            font-size: 2.5em;
+            color: yellow;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .course-item {
+            background: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 12px 0;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .form-container {
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #222222;
+            color: white;
+            cursor: pointer;
+            width: 45%;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #2702fc;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            width: calc(100% - 20px); /* Adjust input width */
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .courses, .importance {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="logo.png" alt="logo" style="width: 150px; margin-bottom: 10px;">
+        <h1><i><u><b>SAKATPUR SMART ZOON</b></u></i></h1>
+    </div>
+    
+    <div class="content">
+        <div class="courses" id="course-list">
+            <h2>Computer Courses</h2>
+            <div class="course-item" onclick="showCourseInfo('basic')">• Basic</div>
+            <div class="course-item" onclick="showCourseInfo('settings')">• All Settings</div>
+            <div class="course-item" onclick="showCourseInfo('documents')">• Document Details</div>
+            <div class="course-item" onclick="showCourseInfo('presentation')">• Presentation</div>
+            <div class="course-item" onclick="showCourseInfo('excel')">• Advance Excel</div>
+            <div class="course-item" onclick="showCourseInfo('access')">• Database (MS Access)</div>
+            <div class="course-item" onclick="showCourseInfo('mysql')">• Database (MySQL)</div>
+            <div class="course-item" onclick="showCourseInfo('tally')">• Tally Prime</div>
+            <div class="course-item" onclick="showCourseInfo('frontend')">• Web Development (Frontend)</div>
+            <div class="course-item">
+                <button onclick="showForm('signup')">Sign Up</button>
+                <button onclick="showForm('login')">Login</button>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div id="login-form">
+                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <div onclick="showForm('forgot')" style="color: #ddd; cursor: pointer; margin-top: 10px;">Forgot Password?</div>
+                <button onclick="showCourseList()">Back</button>
+            </div>
+
+            <div id="signup-form" style="display: none;">
+                <h2>Sign Up</h2>
+                <form action="/signup" method="post">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <button onclick="showCourseList()">Back</button>
+            </div>
+
+            <div id="forgot-form" style="display: none;">
+                <h2>Forgot Password</h2>
+                <form action="/forgot-password" method="post">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <button type="submit">Reset Password</button>
+                </form>
+                <button onclick="showCourseList()">Back</button>
+            </div>
+        </div>
+
+        <div id="course-info" class="course-description">
+            <button onclick="showCourseList()">Back</button>
+        </div>
+
+        <section id="importance" class="importance">
+            <h2>कंप्यूटर सीखने के फायदे</h2>
+            <ul>
+                <li>🌐 <strong>डिजिटल युग:</strong> सभी क्षेत्रों में कंप्यूटर का उपयोग होता है।</li>
+                <li>💼 <strong>करियर के अवसर:</strong> हर नौकरी में कंप्यूटर कौशल की आवश्यकता बढ़ रही है।</li>
+                <li>📊 <strong>डेटा प्रबंधन:</strong> डेटा को समझना और प्रबंधित करना आवश्यक है।</li>
+                <li>🧠 <strong>समस्या समाधान:</strong> कंप्यूटर ज्ञान से समस्याओं को जल्दी हल किया जा सकता है।</li>
+                <li>🔍 <strong>अनुसंधान और जानकारी:</strong> इंटरनेट पर जानकारी खोजने और विश्लेषण में मदद करता है।</li>
+                <li>👥 <strong>सामाजिक संचार:</strong> ऑनलाइन प्लेटफार्मों पर संवाद और नेटवर्किंग में मदद करता है।</li>
+                <li>🌍 <strong>वैश्विक पहुंच:</strong> ज्ञान और संसाधनों तक पहुँच बनाने में मदद करता है।</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; नोट: * हमारे यहाँ 20 STUDENTS को TRAINING दी जाती है. नोट: * सभी STUDENTS का ADMISSION के लिए ENTRANCE EXAM पास होना अनिवार्य है.</p>
+    </footer>
+
+    <script>
+        function showCourseList() {
+            document.getElementById('course-list').style.display = 'inline-block';
+            document.querySelectorAll('.form-container > div').forEach(form => {
+                form.style.display = 'none';
+            });
+            document.getElementById('course-info').style.display = 'none';
+        }
+
+        function showForm(type) {
+            document.getElementById('course-list').style.display = 'none';
+            document.querySelectorAll('.form-container > div').forEach(form => {
+                form.style.display = 'none';
+            });
+            if (type === 'login') {
+                document.getElementById('login-form').style.display = 'block';
+            } else if (type === 'signup') {
+                document.getElementById('signup-form').style.display = 'block';
+            } else if (type === 'forgot') {
+                document.getElementById('forgot-form').style.display = 'block';
+            }
+        }
+
+        function showCourseInfo(course) {
+            document.getElementById('course-list').style.display = 'none';
+            document.getElementById('course-info').style.display = 'flex';
+            // Add course-specific details here as needed
+        }
+    </script>
+
+</body>
+</html>
